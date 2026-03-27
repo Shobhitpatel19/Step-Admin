@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputNav Component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    borderbottom="true"
+    justifycontent="space-between"
+    rawprops="[object Object]"
+  >
+    <div>
+      <button>
+        Unfiltered Master Excel 
+      </button>
+      <button>
+        Filtered Top Talent Candidates 12
+      </button>
+    </div>
+    <div
+      rawprops="[object Object]"
+    >
+      <select
+        data-testid="picker-input"
+      >
+        <option
+          value="1"
+        >
+          STEP_2026_V0
+        </option>
+        <option
+          value="2"
+        >
+          STEP_2025_V1 (Latest)
+        </option>
+        <option
+          value="3"
+        >
+          STEP_2024_V4
+        </option>
+        <option
+          value="4"
+        >
+          STEP_2024_V3
+        </option>
+        <option
+          value="5"
+        >
+          STEP_2024_V2
+        </option>
+      </select>
+    </div>
+  </div>
+</DocumentFragment>
+`;

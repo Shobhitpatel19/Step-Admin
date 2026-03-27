@@ -1,0 +1,100 @@
+{
+  "name": "epmengpin-1981",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/eslint-parser": "^7.25.9",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@epam/assets": "^5.11.0",
+    "@epam/loveship": "^5.11.0",
+    "@epam/uui": "^5.11.0",
+    "@epam/uui-components": "^5.11.0",
+    "@epam/uui-core": "^5.11.0",
+    "@epam/uui-docs": "^5.11.0",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
+    "@reduxjs/toolkit": "^2.5.0",
+    "@testing-library/dom": "^10.4.0",
+    "@types/react-slick": "^0.23.13",
+    "axios": "^1.7.9",
+    "datatables.net": "^1.13.11",
+    "datatables.net-dt": "^1.13.4",
+    "epmengpin-1981": "file:",
+    "eslint-webpack-plugin": "^4.2.0",
+    "history": "^5.3.0",
+    "jquery": "^3.7.1",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.28.0",
+    "react-slick": "^0.30.2",
+    "redux": "^5.0.1",
+    "slick-carousel": "^1.8.1",
+    "uuid": "^11.0.3",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5",
+    "xlsx-js-style": "^1.2.0",
+    "xlsx-style": "^0.8.13"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test",
+    "test:watch": "jest --watch",
+    "test:ci": "npm run test -- --testResultsProcessor=\"jest-junit\" --watchAll=false --ci --coverage"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@epam/uui-test-utils": "^5.11.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.6.1",
+    "axios-mock-adapter": "^2.1.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^29.7.0",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-styled-components": "^1.6.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "jest-sonar-reporter": "^2.0.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "react-scripts": "^5.0.1",
+    "react-test-renderer": "^18.3.1",
+    "redux-mock-store": "^1.5.5",
+    "regenerator-runtime": "^0.12.1",
+    "style-loader": "^0.23.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.0"
+  }
+}

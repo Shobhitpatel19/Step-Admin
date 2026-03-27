@@ -1,0 +1,34 @@
+.container {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-bottom: 20px;
+}
+
+.accessTypesContainer {
+  width: 80%;
+  margin: 10px 0 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.accessLevelsContainer {
+  width: 80%;
+  margin: 10px 0 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer {
+  justify-content: flex-end;
+
+  @media (max-width: 720px) {
+    :global(.uui-button) {
+      flex-basis: 50%;
+    }
+  }
+}

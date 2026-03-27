@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          epam:
+            redirect-uri: https://step.lab.epam.com/api/login/oauth2/code/epam
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${dbname}
+    username: ${username}
+    password: ${password}
+  mail:
+    host: ${host_name}
+    port: 30068
+    username: ${host_username}
+    password: ${host_password}
+    sender-address: ${host_email}
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: smtp-qa.epm-uns.projects.epam.com
+
+logging:
+  level:
+    root: info
+
+step:
+  config:
+    frontend-uri: https://step.lab.epam.com
+    backend-uri: https://step.lab.epam.com/api
+

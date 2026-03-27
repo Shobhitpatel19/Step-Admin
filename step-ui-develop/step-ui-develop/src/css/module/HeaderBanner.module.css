@@ -1,0 +1,41 @@
+.container {
+  background-image: url("/src/assets/header_banner_background.png");
+  min-height: 36px;
+  background-size: cover;
+  background-position: "center";
+  background-repeat: "no-repeat";
+
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  /* position: sticky;
+  z-index: 1000;
+  top: 60px; */
+
+  padding: 1% 0 1.5% 0;
+}
+
+.internalContainer {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.backlinkRow {
+  height: 20px;
+}
+
+.backlinkButton {
+}
+
+.title {
+  margin-top: 5px;
+}
+
+.description {
+}
+
+.cultureLinkButtons {
+  width: 120px;
+  margin-left: 10px;
+  
+}

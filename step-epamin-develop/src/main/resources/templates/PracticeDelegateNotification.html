@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .email-container {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 20px;
+        }
+
+        .email-content {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .content h2 {
+            font-family: Arial;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 30px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+        }
+
+        .content p {
+            margin: 10px 0;
+            font-family: Arial;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+        }
+
+        .content a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-container thead tr{
+            background-color: #F5F6FA;
+            margin-top: 10px;
+            height: 42px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .table-container tbody tr{
+            background-color: #F3F8FE;
+            height: 42px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .table-container td a {
+            color: #0078d7;
+            text-decoration: underline;
+            background-color: #F3F8FE;
+            font-weight:bold;
+        }
+
+        .table-container .status-provided {
+            color: #D61E68;
+            font-weight: bold;
+        }
+
+        .table-container .status-needs-attention {
+            color: #D61E68;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            gap : 20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .provide-rating{
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 10px 20px;
+              font-size: 16px;
+              font-weight: bold;
+              text-color: white;
+              text-transform: uppercase;
+              border-radius: 3px;
+              border : #009ecc 2px solid;
+        }
+
+        .delegate {
+             align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 10px 20px;
+              font-size: 16px;
+              font-weight: bold;
+              color: #000;
+              text-transform: uppercase;
+              background-color: white;
+              background-image: linear-gradient(#fff, #fff);
+              background-origin: border-box;
+              background-clip: padding-box, border-box;
+              cursor: pointer;
+        }
+
+        .footer {
+            background-color: black;
+            padding: 20px;
+            text-align: left;
+            font-size: 12px;
+            color: white;
+        }
+
+        .footer a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+
+        .banner {
+          min-height: 180px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          width : auto;
+        }
+
+      .banner-text .logo {
+          font-size: 1.2em;
+          display: block;
+          margin-bottom: 10px;
+      }
+
+      .epam-logo{
+        width: 100%;
+        padding-left: 20px;;
+        left: 15px;
+        display: flex;
+        align-items: center;
+        flex: 0.5;
+        margin-top: 5%;
+      }
+
+      .epam-logo img {
+        width: 60px;
+	height: 35px;
+      }
+
+      .banner-text{
+        width: 100%;
+        padding-left: 20px;;
+        left: 15px;
+        display: flex;
+        flex: 0.5;
+        flex-direction : row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom : 5%;
+      }
+    </style>
+</head>
+
+<body>
+<table class="email-container">
+    <tr>
+        <td>
+            <table class="email-content">
+                <tr>
+                    <td>
+                        <div class="banner" style="background-image:  url('https://step.lab.epam.com/api/images/PracticeEmailHeader.png'); background-color: rgba(30, 146, 231, 1)">
+                            <div class="epam-logo">
+                                <img src="https://step.lab.epam.com/api/images/EmailLogo.png" alt="<EPAM>"/>
+                            </div>
+                            <div class="banner-text">
+                                <p style="font-size: 36px; font-weight : 250; margin : 0px ; color : white;">
+                                    Delegate Access in <span style="font-weight : 600">STEP</span>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="content">
+                        <div>
+                            <span style="display: inline-block; vertical-align: middle;">Dear</span>
+                            <span>
+                                    <h4 th:text="${name}"
+                                        style="display: inline-block; margin: 0; vertical-align: middle;">[name]</h4>,
+                            </span>
+                        </div>
+                        <p>
+                            We are pleased to inform you that you have been assigned the role of a delegate in the Top
+                            Talent Portal. This assignment is a testament to your skills, trustworthiness, and your
+                            integral role within our team.
+                        <p>
+                            As a delegate, you will be responsible for managing and updating the selected role for your
+                            respective practice under the guidance of
+                            <b><span th:text="${practiceHeadName}">[Practice Head's Name]</span></b>.
+                        </p>
+
+                        <p>
+                            To begin your role as a delegate, please access the portal using the following link: <a
+                                href="https://step.lab.epam.com">STEP</a>
+                        </p>
+
+                        <p>
+                            We encourage you to familiarize yourself with the portal’s functionalities and reach out to
+                            <b><span th:text="${practiceHeadName}">[Practice Head's Name]</span></b> or <a
+                                href="https://www.epam.com/">support</a> for any guidance or questions you may have.
+                        </p>
+
+                        <p> Thank you for taking on this pivotal role. Your contributions are greatly appreciated and
+                            crucial to our continuous growth and success.</p>
+
+                        <p>
+                            Best regards,
+                        </p>
+
+                        <p>
+                            Top Talent Team
+                        </p>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="footer">
+                        <p><a href="https://www.epam.com/" style="color : white">epam.com</a></p>
+                        <p>© <span th:text="${year}">[year]</span> EPAM Systems, Inc. All Rights Reserved</p>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+.container {
+  min-height: 100px;
+  max-height: 475px;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+}

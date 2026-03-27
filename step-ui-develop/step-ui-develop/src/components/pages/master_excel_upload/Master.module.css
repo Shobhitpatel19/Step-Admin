@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 91.5vh;
+  background-color: rgba(245, 246, 250, 1);
+}
+
+.internalContainer {
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+  padding: 24px;
+}

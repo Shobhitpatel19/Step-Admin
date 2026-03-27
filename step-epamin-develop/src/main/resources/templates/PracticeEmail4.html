@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .email-container {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 20px;
+        }
+
+        .email-content {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+
+
+        .content {
+            padding: 15px;
+        }
+
+        .content h2 {
+            font-family: Arial;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 30px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+
+        }
+
+        .content p {
+            margin: 10px 0;
+            font-family: Arial;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: left;
+            text-underline-position: from-font;
+            text-decoration-skip-ink: none;
+        }
+
+        .content a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+
+        }
+
+        .table-container thead tr{
+            background-color: #F5F6FA;
+            margin-top: 10px;
+            height: 42px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .table-container tbody tr{
+            background-color: #F3F8FE;
+            height: 42px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .table-container thead tr th{
+            flex: 0.7;
+            text-align: left;
+        }
+        .table-container tbody tr td{
+            flex: 0.7;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .table-container .status-provided {
+            color: #34C759;
+            font-weight: bold;
+            flex: 0.3;
+        }
+
+        .table-container .status-needs-attention {
+            color: #D61E68;
+            font-weight: bold;
+            flex: 0.3;
+
+        }
+
+        .table-container td a {
+            color: #0078d7;
+            text-decoration: none;
+            background-color: #F3F8FE;
+            font-weight: bold;
+        }
+
+        .table-container td a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .buttons {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            gap : 20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+        }
+
+        .provide-rating{
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 10px 20px;
+              font-size: 16px;
+              font-weight: bold;
+              text-color: white;
+              text-transform: uppercase;
+              border-radius: 3px;
+              border : #009ecc 2px solid;
+        }
+
+        .delegate {
+             align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 10px 20px;
+              font-size: 16px;
+              font-weight: bold;
+              color: #000;
+              text-transform: uppercase;
+              background-color: white;
+              background-image: linear-gradient(#fff, #fff);
+              background-origin: border-box;
+              background-clip: padding-box, border-box;
+              cursor: pointer;
+        }
+
+        .footer {
+            background-color: black;
+            padding: 20px;
+            text-align: left;
+            font-size: 12px;
+            color: white;
+        }
+
+        .footer a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+
+        .banner {
+          min-height: 180px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          width : auto;
+        }
+
+      .banner-text .logo {
+          font-size: 1.2em;
+          display: block;
+          margin-bottom: 10px;
+      }
+
+      .epam-logo{
+        width: 100%;
+        padding-left: 20px;;
+        left: 15px;
+        display: flex;
+        align-items: center;
+        flex: 0.5;
+        margin-top: 5%;
+      }
+
+      .banner-text{
+        width: 100%;
+        padding-left: 20px;;
+        left: 15px;
+        display: flex;
+        flex: 0.5;
+        flex-direction : row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom : 5%;
+      }
+    </style>
+</head>
+
+<body>
+<table class="email-container">
+    <tr>
+        <td>
+            <table class="email-content">
+
+                <tr>
+                    <td>
+                        <div class="banner" style="background-image: url('https://step.lab.epam.com/api/images/PracticeEmailHeader.png'); background-color: rgba(30, 146, 231, 1)">
+                            <div class="epam-logo">
+                                <img style="max-height : 25px" src="https://step.lab.epam.com/api/images/EmailLogo.png" alt="logo" />
+                            </div>
+                            <div class="banner-text" >
+
+                                <p style="font-size: 36px; font-weight : 250; margin : 0px ; color : white;"  >Provide your <span style="font-weight : 600" >Rating</span></p>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="content">
+                        <div>
+                            <span style="display: inline-block; vertical-align: middle;">Dear</span>
+                            <span><h4 th:text="${name}"  style="display: inline-block; margin: 0; vertical-align: middle;">[name]</h4> <span>,</span> </span>
+                        </div>
+                        <p>I hope this message finds you well. We are now entering the final week for the candidate rating process on the Top Talent portal. This is your third reminder, and we urge you to complete the evaluations if you have not done so already.</p>
+
+                        <p>To access the ratings page, please click on the following link: <a href="https://www.epam.com/">STEP</a></p>
+
+                        <p>Keep in mind that we are nearing the close of this evaluation cycle, and there is limited time remaining to finalize your assessments. Another reminder will follow later this week as a last prompt before the deadline.</p>
+
+                        <p>Thank you for ensuring the timely completion of this critical process. Should you require any assistance or have questions, please do not hesitate to reach out <a href="https://www.epam.com/" >Support</a>.</p>
+
+                        <div th:if="${names != null && names.size() > 0}">
+
+                            <p>
+                                These are the list of candidates yet to be rated :
+                            </p>
+
+                            <table class="table-container">
+                                <thead>
+                                <tr>
+                                    <th style="flex: 0.7;" >Name</th>
+                                    <th style="flex: 0.3;" >Rating Status</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+
+
+                                <tr th:each="candidate : ${names}">
+
+                                    <td>
+                                        <a th:text="${candidate.name}"
+                                           th:href="'https://step.lab.epam.com/practice?uid=' + ${candidate.uid}">
+                                            [Name]
+                                        </a>
+                                    </td>
+                                    <td class="status-needs-attention">
+                                        <span th:if="${candidate.status.name() == 'S'}">Approval Pending</span>
+                                        <span th:if="${candidate.status.name() == 'NA'} or ${candidate.status.name() == 'D'}">Rating Pending</span>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="buttons">
+                            <a class="provide-rating" href="https://step.lab.epam.com/practice" style="color : #009ecc" > Provide Rating </a>
+                            <a class="delegate" href="https://step.lab.epam.com/practice_delegate" style="color : #009ecc">Delegate</a>
+                        </div>
+
+                        <p>
+                            Thank you for your attention and cooperation.
+                        </p>
+
+                        <p>
+                            Best regards,
+                        </p>
+
+                        <p>
+                            Top Talent Team
+                        </p>
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="footer">
+                        <p><a href="https://www.epam.com/" style="color : white">epam.com</a></p>
+                        <p>© <span th:text="${year}"  >[year]</span> EPAM Systems, Inc. All Rights Reserved</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

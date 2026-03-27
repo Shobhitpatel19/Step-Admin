@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeedbackStages component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="feedback-container"
+  >
+    <h1
+      class="feedback-heading"
+    >
+      How STEP Works
+    </h1>
+    <div
+      class="feedback-stages"
+    >
+      <div
+        class="feedback-stage normal"
+      >
+        <div
+          class="feedback-info"
+        >
+          <div
+            class="feedback-number"
+          >
+            01
+          </div>
+          <h2
+            class="feedback-title"
+          >
+            Content in Progress
+          </h2>
+          <ul
+            class="feedback-description"
+          >
+            <li />
+          </ul>
+        </div>
+        <div>
+          <img
+            alt="Content in Progress"
+            class="feedback-image"
+            src="feedBack1.png"
+          />
+        </div>
+      </div>
+      <div
+        class="feedback-stage reverse"
+      >
+        <div
+          class="feedback-info"
+        >
+          <div
+            class="feedback-number"
+          >
+            02
+          </div>
+          <h2
+            class="feedback-title"
+          >
+            Content in Progress
+          </h2>
+          <ul
+            class="feedback-description"
+          >
+            <li />
+          </ul>
+        </div>
+        <div>
+          <img
+            alt="Content in Progress"
+            class="feedback-image"
+            src="feedBack2.png"
+          />
+        </div>
+      </div>
+      <div
+        class="feedback-stage normal"
+      >
+        <div
+          class="feedback-info"
+        >
+          <div
+            class="feedback-number"
+          >
+            03
+          </div>
+          <h2
+            class="feedback-title"
+          >
+            Content in Progress
+          </h2>
+          <ul
+            class="feedback-description"
+          >
+            <li />
+          </ul>
+        </div>
+        <div>
+          <img
+            alt="Content in Progress"
+            class="feedback-image"
+            src="feedBack3.png"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="feedback-line-container"
+    >
+      <svg
+        height="100%"
+        width="100%"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

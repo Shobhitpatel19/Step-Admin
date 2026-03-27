@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .email-container {
+            width: 100%;
+            background-color: #FFFFFF;
+            padding: 20px;
+        }
+
+        .email-content {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .content h4 {
+            font-family: Arial;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 22px;
+            text-align: left;
+            color: #333;
+        }
+
+        .content p {
+            margin: 10px 0;
+            font-family: Arial;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: left;
+        }
+
+        .content a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+
+        .footer {
+            background-color: black;
+            padding: 20px;
+            text-align: left;
+            font-size: 12px;
+            color: white;
+        }
+
+        .footer a {
+            color: #0078d7;
+            text-decoration: none;
+        }
+
+        .banner {
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: auto;
+        }
+
+        .banner-text .logo {
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .epam-logo {
+            width: 100%;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            flex: 0.5;
+            margin-top: 5%;
+        }
+
+        .banner-text {
+            width: 100%;
+            padding-left: 20px;
+            display: flex;
+            flex: 0.5;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 5%;
+        }
+    </style>
+</head>
+
+<body>
+<table class="email-container">
+    <tr>
+        <td>
+            <table class="email-content">
+                <tr>
+                    <td>
+                        <div class="banner" style="background-image: url('https://step.lab.epam.com/api/images/PracticeEmailHeader.png'); background-color: rgba(30, 146, 231, 1)">
+                            <div class="epam-logo">
+                                <img style="max-height : 25px" src="https://step.lab.epam.com/api/images/EmailLogo.png" alt="logo" />
+                            </div>
+                            <div class="banner-text">
+                                <p style="font-size: 36px; font-weight : 250; margin : 0px ; color : white;">Future Skills Submission</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="content">
+                        <div>
+                            <span style="display: inline-block; vertical-align: middle;">Dear</span>
+                            <span><h4 th:text="${adminName}"  style="display: inline-block; margin: 0; vertical-align: middle;">[Admin Name]</h4>,</span>
+                        </div>
+                        <p>
+                            We are pleased to inform you that <b th:text="${submittedByName}">[Name of submitted by]</b> for <b th:text="${practiceName}">[Practice Name]</b> has successfully submitted the Future Skills for their respective practice.
+                        </p>
+                        <p>
+                            You can directly click on the following <a href="https://step.lab.epam.com/future-skills">link</a> to view the submitted Future Skills or login to STEP via the link below and navigate to Admin >> Future Skills to view the same:
+                        </p>
+                        <p>
+                            <a href="https://step.lab.epam.com">STEP Portal</a>
+                        </p>
+                        <p> Should you require any assistance, please do not hesitate to reach out to <a href="https://www.epam.com/" >Support</a>.</p>
+                        <p>
+                            Thank you.
+                        </p>
+
+                        <p>
+                            Best regards,
+                        </p>
+
+                        <p>
+                            Top Talent Team
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="footer">
+                        <p><a href="https://www.epam.com/" style="color : white">epam.com</a></p>
+                        <p>© <span th:text="${year}"  >[year]</span> EPAM Systems, Inc. All Rights Reserved</p>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,83 @@
+.practice-headpage {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  /* border : 10px solid black; */
+  height: 100vh;
+}
+.name-link {
+  font-size: 18px;
+  font-weight: 600;
+  color: black; /* blue color like a link */
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.user-profile:hover .name-link {
+  color: #0b57d0; /* darker blue on hover */
+}
+
+/* .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} */
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 60px;
+  /* border: 10px solid yellow; */
+
+  background-color: rgba(245, 246, 250, 1);
+}
+
+.practice-data {
+  width: 100%;
+  height: 100%;
+  gap: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(245, 246, 250, 1);
+  /* background-color: aqua; */
+}
+
+.mean-score-div {
+  background-color: antiquewhite;
+  height: 1%;
+  width: 50%;
+  border-radius: 50%;
+}
+
+.user-profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-img {
+  width: 50px;
+  align-self: center;
+}
+.user-details {
+  width: 400px;
+  align-items: self-start;
+}
+
+.uui-theme-loveship .uui-size-24 {
+  --uui-size: 36px;
+  --uui-border-width: 1px;
+  --uui-horizontal-gap: 6px;
+  --uui-vertical-gap: 3px;
+  --uui-horizontal-padding: 6px;
+  --uui-vertical-padding: 9px;
+  --uui-icon-size: 18px;
+  --uui-line-height: 18px;
+  --uui-font-size: 14px;
+  --uui-dot-size: 8px;
+}

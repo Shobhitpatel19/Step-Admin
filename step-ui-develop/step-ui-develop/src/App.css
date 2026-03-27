@@ -1,0 +1,198 @@
+/* General Styles */
+
+
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+.header {
+  padding: 16px;
+  color: white;
+}
+
+.admin-dropdown {
+  padding: 8px;
+  border-radius: 4px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dropdown-item {
+  padding: 8px 12px;
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.admin-dropdown-item:hover {
+  color: #009ecc;
+}
+
+.top-talent-section {
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #283863;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr)); /* Smaller boxes with a minimum width */
+  gap: 2rem; /* Slightly reduced gap between items */
+  justify-content: center; /* Center the entire grid horizontally */
+  align-items: center; /* Center the grid items vertically */
+  width: 100%; /* Ensures the grid spans the full width */
+  margin: 0 auto; /* Center the grid on the page */
+}
+
+.stages-grid > *:nth-child(4) {
+  grid-column: span 1; /* Span the fourth item across the entire row */
+  text-align: center; /* Center content inside the fourth item */
+}
+
+/* Stage Card */
+.stage-card {
+  padding: 1px; /* Reduced padding for smaller boxes */
+  border-radius: 1px; /* Slightly smaller border radius */
+  text-align: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Avatar */
+.stage-avatar {
+  width: 80px; /* Smaller avatar size */
+  height: 80px; /* Match width */
+  margin-bottom: 0.8rem; /* Reduced margin */
+  border-radius: 50%;
+  background-color: #fff;
+  object-fit: cover;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15); /* Lighter shadow */
+}
+
+
+/* Stage Title */
+.stage-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+/* Stage Description */
+.stage-description {
+  font-size: 0.85rem;
+  color: #fff;
+  line-height: 1.5;
+  
+}
+.BlockHeader_header__DgqdV {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #283863;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.Stages_stages_list__QI9WP {
+  margin: 20px;
+  font-family: Sans Regular, Arial, sans-serif;
+  
+}
+.Stages_text__RD601 {
+  color: #474a59;
+  font-weight: 400;
+}
+
+.Stages_stage__shNDd {
+  display: flex;
+  align-items: flex-start;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  width: 100%;
+  font-family: Sans Regular, Arial, sans-serif;
+  justify-content: space-between;
+  
+}
+
+.Stages_stage__shND{
+  flex-flow: row-reverse;
+  display: flex;
+  align-items: flex-start;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  width: 100%;
+  font-family: Sans Regular, Arial, sans-serif;
+  justify-content: space-between;
+}
+
+.Stages_info__H1Yz9 {
+  flex: 1;
+  font-family: Sans Regular, Arial, sans-serif;
+  padding-left: 85px;
+  flex-flow: column;
+  padding-top: 18px;
+  color: #474a59;
+  line-height: 24px;
+}
+
+.Stages_stage_number__Y9igu {
+  align-self: flex-start;
+  padding-right: 0;
+  font-size: 54px;
+  letter-spacing: .13px;
+  line-height: 48px;
+  margin-bottom: 8px;
+  color: #e1e3eb;
+  font-family: Sans Bold, Arial, sans-serif;  
+}
+
+.Stages_stage_title__7Hahu {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #283863;
+  font-family: Sans Semibold, Arial, sans-serif;
+}
+
+.Stages_stage_description__6tVDL p {
+  margin: 5px 0;
+  font-size: 18px;
+  line-height: 24px;
+  line-height: 24px;
+  
+}
+
+.Stages_stage_image__3yYbY{
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  background-position: center;
+  width: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Flex Spacer */
+.flex-spacer {
+  flex: 1;
+}
+

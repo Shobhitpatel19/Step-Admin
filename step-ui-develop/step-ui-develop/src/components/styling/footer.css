@@ -1,0 +1,29 @@
+.footer {
+  background-color: #060606; /* Dark background similar to the image */
+  color: white;
+  display: flex;
+  justify-content: space-between; /* Align left and right content */
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  width: 96vw;
+  /* margin-top: 50vh; */
+  /* position: sticky; */
+}
+ 
+.footer-left {
+  display: flex;
+}
+ 
+.logo {
+  width: 80px;
+  margin-right: 10px;
+}
+ 
+.footer-right {
+  font-size: 0.7rem;
+}
+ 
+.footer span {
+  margin-left: 10px;
+}

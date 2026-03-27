@@ -1,0 +1,73 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" ||
+        $CI_COMMIT_BRANCH == "develop" ||
+        $CI_COMMIT_BRANCH =~ /^feature\// ||
+        $CI_COMMIT_BRANCH =~ /^Bug\// ||
+        $CI_COMMIT_BRANCH =~ /^release-\d+(\.\d+)*$/
+      when: always 
+stages:
+  - build  
+  - test
+  - sonarqube
+ 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+ 
+build-job: 
+  image: node:latest
+  stage: build 
+  script:
+    - npm install
+    - CI=false npm run build  
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+# lint:
+#   image: node:latest
+#   stage: test
+#   script:
+#     - npm install
+#     - npm run lint
+ 
+unit-test:
+  image: node:latest
+  stage: test
+  dependencies:
+    - build-job
+  before_script:
+    - npm install
+  script:
+    - npm run test:ci || true
+    - ls -la coverage/
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  artifacts:
+    paths:
+      - coverage/
+      - junit.xml
+    when: always
+    reports:
+      junit:
+        - junit.xml
+ 
+sonarqube-check:
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  stage: sonarqube
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" 
+    GIT_DEPTH: "0" 
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - npm install
+    - npm test -- --coverage --testResultsProcessor=jest-sonar-reporter || true
+    - sed -i 's/\x1b//g' test-report.xml
+    - sonar-scanner -X -Dproject.settings=sonar-project.properties
+  allow_failure: true

@@ -1,0 +1,36 @@
+.container {
+  background-image: url("https://levelup.epam.com/images/header_bg_min.webp");
+  min-height: 36px;
+  background-size: cover;
+  background-position: "center";
+  background-repeat: "no-repeat";
+ 
+  display: flex;
+  align-items: center;
+  justify-items: center;
+ 
+  padding: 3% 0 2% 0;
+ 
+  margin-bottom: 12px;
+}
+ 
+.internalContainer {
+  width: 90%;
+  margin: 0 auto;
+}
+ 
+.backlinkRow {
+  height: 20px;
+}
+.title {
+  flex-grow: 1;
+  margin-top: 5px;
+}
+ 
+.cultureLinkButtons {
+  width: 120px;
+  margin-left: 10px;
+}
+.crossButton{
+  color: white;
+}

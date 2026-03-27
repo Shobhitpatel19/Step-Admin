@@ -1,0 +1,95 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  padding: 12px 18px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #444;
+  color: white;
+}
+
+/* Small Devices (Phones) */
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+/* Medium Devices (Tablets) */
+@media (min-width: 577px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    width: 85%;
+  }
+
+  .button {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+}
+
+/* Large Devices (Desktops) */
+@media (min-width: 1025px) {
+  body {
+    font-size: 18px;
+  }
+
+  .container {
+    width: 75%;
+  }
+
+  .button {
+    padding: 14px 20px;
+    font-size: 18px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .button {
+    background-color: #555;
+    color: white;
+  }
+
+  .button:hover {
+    background-color: #777;
+  }
+}

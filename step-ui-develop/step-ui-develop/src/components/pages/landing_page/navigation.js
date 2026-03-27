@@ -1,0 +1,249 @@
+import React, { useEffect, useRef, useState } from "react";
+import "../landing_page/navigation.css";
+import Footer from "./footer";
+import step_logo from "../../../assets/step_logo_new.svg";
+import {
+  GlobalMenu,
+  MainMenu,
+  MainMenuAvatar,
+  MainMenuButton,
+  FlexSpacer,
+  FlexCell,
+  MainMenuDropdown,
+  DropdownMenuBody,
+  DropdownMenuButton,
+} from "@epam/uui";
+import { Dropdown, MainMenuLogo } from "@epam/uui-components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getTokenFromCookies, decodeToken } from "../../utils/auth";
+import Banner from "../../common/Banner/Banner";
+import TopTalentSection from "./TopTalentSection";
+import FeedbackStages from "./feedback";
+import PracticeDelegate from "../delegate_request/Delegate";
+import { useUuiContext } from "@epam/uui-core";
+import PracticeInfo from "./cards/practice_guide/cards";
+import NotificationPage from "../Admin_notification/NotificationPage";
+ 
+export function Navbar({ hideContent }) {
+  const [burgerSearchQuery, setBurgerSearchQuery] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+  const navigate = useNavigate();
+ 
+  const [isNotificationPanelOpen, setIsNotificationPanelOpen] = useState(false);
+ 
+  const location = useLocation();
+  const { uuiModals } = useUuiContext();
+  const isPracticeDelegateShown = useRef(false);
+
+  const currentPath = location.pathname;
+  console.log(currentPath, "CURRENT PATH");
+ 
+  const openPracticeDelegate = (backtrackPath) => {
+    uuiModals
+      .show((props) => <PracticeDelegate {...props} />)
+      .then((result) => {})
+      .catch(() => {
+        window.history.replaceState(null, "", backtrackPath);
+      });
+  };
+ 
+  useEffect(() => {
+    const token = getTokenFromCookies();
+    if (token) {
+      const { picture } = decodeToken(token);
+      setProfilePicture(picture);
+    }
+ 
+    if (location.pathname === "/delegate" && !isPracticeDelegateShown.current) {
+      isPracticeDelegateShown.current = true;
+      setTimeout(() => {
+        openPracticeDelegate("/welcome");
+      }, 100);
+    }
+  }, []);
+ 
+  const adminDropdownItems = [
+    {
+      key: "identificationMeritListUpload",
+      caption: "Initial Identification Merit List",
+      path: "/merit-list",
+    },
+    { key: "cultureScore", caption: "Culture Score", path: "/culture-score" },
+    {
+      key: "contributions",
+      caption: "Contributions (EngX and Extra Mile Activities)",
+      path: "/engx-extra-mile",
+    },
+    {
+      key: "practiceRating",
+      caption: "Practice Rating",
+      path: "/practice",
+    },
+    {
+      key: "Master Excel View",
+      caption: "Identify Final Merit List",
+      path: "/view-master-data",
+    },
+    {
+      key: "manageNotification",
+      caption: "Manage Notification",
+      path: "/notification",
+    },
+    { key: "delegateRequest", caption: "Delegate Request", path: "/delegate" },
+  ];
+ 
+  const renderDropdownItems = (menuConfig) => {
+    return menuConfig.map((itemConfig) => (
+      <DropdownMenuButton
+        key={itemConfig.key}
+        caption={itemConfig.caption}
+        onClick={() => {
+          if (itemConfig.key === "delegateRequest") {
+            openPracticeDelegate(location.pathname + location.search);
+            window.history.pushState(null, "", "/delegate");
+          }
+          else if (itemConfig.key === "manageNotification") {
+            navigate("/notification");
+            setIsNotificationPanelOpen(true);
+          }
+          else if (itemConfig.path) {
+            navigate(itemConfig.path);
+          }
+        }}
+      />
+    ));
+  };
+ 
+  const renderAdminDropdown = (props) => (
+    <Dropdown
+      className="Admin"
+      renderTarget={(props) => (
+        <MainMenuButton
+          key={props}
+          {...props}
+          caption="Admin"
+          className="inner_admin"
+        />
+      )}
+      renderBody={(p) => (
+        <DropdownMenuBody key={p} cx="admin-dropdown-body">
+          {renderDropdownItems(adminDropdownItems)}
+        </DropdownMenuBody>
+      )}
+    />
+  );
+ 
+  const renderAvatar = () => (
+    <Dropdown
+      key="avatar"
+      renderTarget={(props) => (
+        <MainMenuAvatar
+          avatarUrl={profilePicture || "https://example.com/default-avatar.jpg"}
+        />
+      )}
+    />
+  );
+ 
+  const getMenuItems = () => [
+    {
+      id: "logo",
+      priority: 99,
+      render: (p) => <MainMenuLogo key={p.id} href="/" logoUrl={step_logo} />,
+    },
+    {
+      id: "WELCOME",
+      priority: 9,
+      render: (p) => (
+        <MainMenuButton
+          key={p.id}
+          href="/welcome"
+          caption="Welcome"
+          className="welcome_section"
+        />
+      ),
+      caption: "Welcome",
+    },
+ 
+    {
+      id: "ADMIN",
+      priority: 7,
+      render: renderAdminDropdown,
+      caption: "Admin",
+    },
+ 
+    {
+      id: "moreContainer",
+      priority: 8,
+      collapsedContainer: true,
+      render: (item, hiddenItems) => (
+        <MainMenuDropdown
+          caption="More"
+          key={item.id}
+          renderBody={(props) => {
+            return hiddenItems?.map((i) =>
+              i.render({ ...i, onClose: props.onClose })
+            );
+          }}
+        />
+      ),
+    },
+    {
+      id: "flexSpacer",
+      priority: 100,
+      render: (p) => <FlexSpacer key={p.id} />,
+    },
+    { id: "avatar", priority: 9, render: renderAvatar },
+    {
+      id: "globalMenu",
+      priority: 100,
+      render: (p) => <GlobalMenu key={p.id} />,
+    },
+  ];
+  const [firstName, setFirstName] = useState("Guest");
+ 
+  useEffect(() => {
+    const token = getTokenFromCookies();
+    if (token) {
+      const decodedToken = decodeToken(token);
+      setFirstName(decodedToken?.firstName || "Guest");
+    }
+  }, []);
+ 
+  return (
+    <>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 1000,
+          backgroundColor: "#fff",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <FlexCell grow={1}>
+          <MainMenu items={getMenuItems()} />
+        </FlexCell>
+      </div>
+      {hideContent || (
+        <div>
+          <Banner
+            title={`Welcome, ${firstName}`}
+            description="STEP is a structured talent development program that identifies and nurtures top internal talent early in their careers. It accelerates growth through career planning, training, mentoring, and personalized action plans, preparing participants for future roles within their competencies. The program equips high-potential employees with the skills necessary to drive the future of their respective domains."
+            backlink="/welcome"
+          />
+
+          {(isNotificationPanelOpen || currentPath == "/notification") && <NotificationPage closeMethod = {setIsNotificationPanelOpen} />}
+          <TopTalentSection />
+          <FeedbackStages />
+          <Footer />
+        </div>
+      )}
+    </>
+  );
+}
+ 
+ 
+ 
+ 

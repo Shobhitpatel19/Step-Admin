@@ -1,0 +1,29 @@
+.container {
+ 
+}
+
+.heading {
+}
+
+.divCenter {
+  width: 1200px;
+  justify-self: center;
+}
+
+.dropShot {
+  margin-bottom: 10px;
+}
+
+.attachmentFileCard{
+  /* justify-self: center;
+  width: 1200px; */
+}
+
+.afterUploadButtonsContainer {
+  max-height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+}

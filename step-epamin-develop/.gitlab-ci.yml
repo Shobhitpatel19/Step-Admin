@@ -1,0 +1,61 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" ||
+        $CI_COMMIT_BRANCH == "develop" ||
+        $CI_COMMIT_BRANCH =~ /^feature\// ||
+        $CI_COMMIT_BRANCH =~ /^Bug\// ||
+        $CI_COMMIT_BRANCH =~ /^release-\d+(\.\d+)*$/
+      when: always
+
+stages:
+  - build
+  - test
+  - sonarqube
+  
+before_script:
+  - rm -rf ~/.m2/repository/org/apache/maven/surefire
+
+variables:
+  MAVEN_CLI_OPTS: "-s $M2_SETTINGS_XML --batch-mode --errors --fail-at-end --show-version --update-snapshots"
+ 
+build:
+  stage: build
+  image: maven:3.8.3-openjdk-17
+  script:
+    - echo "Building the application..."
+    - mvn $MAVEN_CLI_OPTS clean package -DskipTests
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 1 week
+ 
+test:
+  stage: test
+  image: maven:3.8.3-openjdk-17
+  script:
+    - echo "Running tests..."
+    - mvn $MAVEN_CLI_OPTS clean
+    - mvn $MAVEN_CLI_OPTS test
+  dependencies:
+    - build
+  artifacts:
+    reports:
+      junit: target/test-classes/*.xml
+    expire_in: 1 week
+
+
+
+sonarqube-check:
+  stage: sonarqube
+  image: maven:3.8.3-openjdk-17
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+    GIT_DEPTH: "0" 
+  cache:
+    key: "${CI_JOB_NAME}-${CI_COMMIT_REF_SLUG}"
+    paths:
+    - .sonar/cache
+  script: 
+  - echo "Running SonarQube analysis..."
+  - mvn $MAVEN_CLI_OPTS verify sonar:sonar -Dsonar.projectKey=EPM-INAI-step-epamin
+  allow_failure: true

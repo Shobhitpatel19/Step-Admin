@@ -1,0 +1,38 @@
+.contentArea {
+  margin: auto;
+  width: 1200px;
+}
+
+.descriptionAndButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+.tableDescription {
+  flex: 1;
+  margin-right: 90px;
+}
+.textSpacing {
+  margin-bottom: -12px;
+}
+
+.sideDrawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* width: 30%; */
+  height: 100%;
+  background-color: white;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+.show {
+  transform: translateX(0);
+}

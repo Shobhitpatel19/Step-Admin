@@ -1,0 +1,78 @@
+.fixed_nav {
+  position: sticky;
+  width: 100%;
+  height: 60px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.279);
+}
+
+.Logo {
+  width: 152px;
+  height: 60px;
+  padding-top: 12px;
+  padding-right: 18px;
+  padding-bottom: 12px;
+  padding-left: 18px;
+  gap: 6px;
+}
+
+.welcome_section {
+  background-color: #303240;
+  width: 87px;
+  height: 60px;
+  padding-top: 15px;
+  padding-right: 6px;
+  padding-bottom: 15px;
+  padding-left: 6px;
+}
+
+.dashboard_section {
+  background-color: #303240;
+  width: 99px;
+  height: 60px;
+  padding-top: 15px;
+  padding-right: 6px;
+  padding-bottom: 15px;
+  padding-left: 6px;
+}
+
+.Admin {
+  background-color: #303240;
+  width: 87px;
+  height: 60px;
+  padding-top: 15px;
+  padding-right: 6px;
+  padding-bottom: 15px;
+  padding-left: 6px;
+}
+
+.inner_admin {
+  background-color: #30324000;
+  color: white;
+  width: 45px;
+  height: 18px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.Admin .admin-dropdown-body {
+  background-color: black;
+}
+
+.Admin .admin-dropdown-body .DropdownMenuButton {
+  color: white;
+  background-color: transparent;
+  border: none;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.Admin .admin-dropdown-body .DropdownMenuButton:hover {
+  background-color: blue;
+  color: white;
+}

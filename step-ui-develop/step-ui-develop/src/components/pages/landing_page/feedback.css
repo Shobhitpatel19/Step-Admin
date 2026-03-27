@@ -1,0 +1,140 @@
+.feedback-container {
+  position: relative;
+  padding: 40px;
+  background-color: white;
+  margin: 40px auto;
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feedback-heading {
+  font-size: 36px;
+  font-weight: bold;
+  color: #283863;
+  text-align: left;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.feedback-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+  width: 100%;
+}
+
+.feedback-stage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 200px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.feedback-stage.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feedback-stage.reverse {
+  flex-direction: row-reverse;
+}
+
+.feedback-info {
+  flex: 1;
+  text-align: left;
+  padding: 20px;
+}
+
+.feedback-number {
+  font-size: 50px;
+  font-weight: bold;
+  color: #00abcd;
+  margin-bottom: 10px;
+}
+
+.feedback-title {
+  font-size: 28px;
+  font-style: italic;
+  font-weight: bold;
+  color: #283863;
+  margin-bottom: 10px;
+}
+
+.feedback-description {
+  list-style: none;
+  padding: 0;
+}
+
+.feedback-description li {
+  margin: 5px 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #474a59;
+}
+
+.feedback-line-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.feedback-image {
+  flex-shrink: 0;
+  width: 90%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  align-self: right;
+}
+
+.curved-line {
+  stroke: #00abcd;
+  stroke-width: 4;
+  fill: none;
+  stroke-dasharray: 15, 15;
+  animation: drawLine 2s ease-in-out forwards;
+}
+
+@keyframes drawLine {
+  from {
+    stroke-dashoffset: 500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .feedback-stage {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feedback-stage {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .feedback-image {
+    max-width: 100%;
+  }
+
+  .feedback-info {
+    text-align: center;
+  }
+}

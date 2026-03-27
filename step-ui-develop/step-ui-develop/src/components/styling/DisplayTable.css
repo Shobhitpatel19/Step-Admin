@@ -1,0 +1,77 @@
+.table-container {
+  margin-top: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.search-bar input {
+  width: 200px;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.show-entries {
+  display: flex;
+  align-items: center;
+}
+
+.show-entries select {
+  margin-left: 5px;
+}
+
+.scrollable-table {
+  max-height: 400px; 
+  overflow-y: auto;
+  overflow-x: auto; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 10px; 
+}
+
+.scrollable-table table {
+  width: 100%;
+  border-collapse: collapse; 
+}
+
+.table-cell {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+}
+
+@media (max-width: 768px) {
+  .table-header, .pagination, .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination button, .search-bar input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

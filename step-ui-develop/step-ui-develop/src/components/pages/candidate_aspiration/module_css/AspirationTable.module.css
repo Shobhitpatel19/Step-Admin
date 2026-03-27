@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.searchContainer > * {
+  max-width: 300px;
+  width: 100%;
+}
