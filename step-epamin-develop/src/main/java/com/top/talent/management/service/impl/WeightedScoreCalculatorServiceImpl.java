@@ -53,15 +53,19 @@ public class WeightedScoreCalculatorServiceImpl implements WeightedScoreCalculat
     private double calculateWeightedScore(TopTalentEmployee employee) {
         Double totalScore = 0D;
 
-        totalScore += CULTURE_SCORE_WEIGHTAGE*employee.getCultureScoreFromFeedback();
-        totalScore += DELIVERY_TI_SCORE_WEIGHTAGE*employee.getDeliveryFeedbackTtScore();
-        totalScore += PRACTICE_RATING_WEIGHTAGE*employee.getPracticeRating();
-        totalScore += ENGX_SCORE_WEIGHTAGE*employee.getContributionEngXCulture();
-        totalScore += EXTRA_MILE_SCORE_WEIGHTAGE*employee.getContributionExtraMiles();
+        totalScore += CULTURE_SCORE_WEIGHTAGE * getOrZero(employee.getCultureScoreFromFeedback());
+        totalScore += DELIVERY_TI_SCORE_WEIGHTAGE * getOrZero(employee.getDeliveryFeedbackTtScore());
+        totalScore += PRACTICE_RATING_WEIGHTAGE * getOrZero(employee.getPracticeRating());
+        totalScore += ENGX_SCORE_WEIGHTAGE * getOrZero(employee.getContributionEngXCulture());
+        totalScore += EXTRA_MILE_SCORE_WEIGHTAGE * getOrZero(employee.getContributionExtraMiles());
 
         DecimalFormat df = new DecimalFormat("#.##");
         String formattedValue = df.format(totalScore);
 
         return Double.parseDouble(formattedValue);
+    }
+
+    private double getOrZero(Number value) {
+        return value == null ? 0D : value.doubleValue();
     }
 }
