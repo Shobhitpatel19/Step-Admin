@@ -9,14 +9,20 @@ import com.top.talent.management.service.impl.WeightedScoreCalculatorServiceImpl
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.util.Collections;
 import java.util.List;
 
+import static com.top.talent.management.constants.NumericConstants.CULTURE_SCORE_WEIGHTAGE;
+import static com.top.talent.management.constants.NumericConstants.DELIVERY_TI_SCORE_WEIGHTAGE;
+import static com.top.talent.management.constants.NumericConstants.ENGX_SCORE_WEIGHTAGE;
+import static com.top.talent.management.constants.NumericConstants.EXTRA_MILE_SCORE_WEIGHTAGE;
+import static com.top.talent.management.constants.NumericConstants.PRACTICE_RATING_WEIGHTAGE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.times;
@@ -24,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
+@ExtendWith(MockitoExtension.class)
 class WeightedScoreCalculatorServiceImplTest {
 
     @Mock
@@ -39,8 +46,6 @@ class WeightedScoreCalculatorServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
-
         TopTalentExcelVersion latestVersion = new TopTalentExcelVersion(); // Assuming constructor
         latestVersion.setId(1L); // Set required properties as needed
 
@@ -82,22 +87,34 @@ class WeightedScoreCalculatorServiceImplTest {
         employee1.setTopTalentExcelVersion(mockExcelVersion);
         List<TopTalentEmployee> employees = Collections.singletonList(employee1);
 
+        when(talentExcelVersionService.findLatestVersion())
+                .thenReturn(mockExcelVersion);
 
-        when(topTalentEmployeeRepository.findAllByTopTalentExcelVersion(any()))
+        when(topTalentEmployeeRepository.findAllByTopTalentExcelVersion(mockExcelVersion))
                 .thenReturn(employees);
 
 
-        double calculatedScore = 4 * 0.35 + 3.8 * 0.30 + 4 * 0.10 + 4 * 0.05 + 3 * 0.20;
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(0.35, PRACTICE_RATING_WEIGHTAGE, 0.0),
+                () -> Assertions.assertEquals(0.20, ENGX_SCORE_WEIGHTAGE, 0.0),
+                () -> Assertions.assertEquals(0.05, EXTRA_MILE_SCORE_WEIGHTAGE, 0.0),
+                () -> Assertions.assertEquals(0.20, CULTURE_SCORE_WEIGHTAGE, 0.0),
+                () -> Assertions.assertEquals(0.20, DELIVERY_TI_SCORE_WEIGHTAGE, 0.0),
+                () -> Assertions.assertEquals(1.0,
+                        PRACTICE_RATING_WEIGHTAGE + ENGX_SCORE_WEIGHTAGE + EXTRA_MILE_SCORE_WEIGHTAGE
+                                + CULTURE_SCORE_WEIGHTAGE + DELIVERY_TI_SCORE_WEIGHTAGE,
+                        0.0)
+        );
+
+        double calculatedScore = 8.53;
 
         when(topTalentEmployeeMapper.employeeDataToEmployeeDTO(any()))
-                .thenReturn(new TopTalentEmployeeDTO(
-                        "John Doe", 653006L, "New York", "2020-01-15", "3 Years", "Software Engineer",
-                        "Active", "Development", "Engineering", "Jane Smith", "PGM123",
-                        "PRJ456", "JF5", "Java Practice", "Java", "Spring, Hibernate",
-                        "Yes", "High Performer", "Top Performer", 95D,
-                        4.5, 10L, 15L, 80D, calculatedScore, null,
-                        "98th Percentile", "HRBP1", "John DH", false
-                ));
+                .thenAnswer(invocation -> {
+                    TopTalentEmployee employee = invocation.getArgument(0);
+                    TopTalentEmployeeDTO dto = new TopTalentEmployeeDTO();
+                    dto.setOverallWeightedScoreForMerit(employee.getOverallWeightedScoreForMerit());
+                    return dto;
+                });
 
 
         List<TopTalentEmployeeDTO> topTalentEmployeeDTOS = weightedScoreCalculatorService.calculateAndAssignWeightedScores();
@@ -109,6 +126,41 @@ class WeightedScoreCalculatorServiceImplTest {
         Assertions.assertEquals(calculatedScore, topTalentEmployeeDTOS.get(0).getOverallWeightedScoreForMerit(), 0.01);
 
         verify(topTalentEmployeeRepository, times(1)).saveAll(anyList());
+    }
+
+    @Test
+    void testCalculateAndAssignWeightedScores_IncludesDeliveryFeedbackAtTwentyPercent() {
+        TopTalentExcelVersion mockExcelVersion = new TopTalentExcelVersion();
+        mockExcelVersion.setFileName("STEP_2025_V1");
+        mockExcelVersion.setVersionName("V1");
+        mockExcelVersion.setUploadedYear("2025");
+
+        TopTalentEmployee deliveryOnlyEmployee = TopTalentEmployee.builder()
+                .uid(102L)
+                .topTalentExcelVersion(mockExcelVersion)
+                .name("Jane Doe")
+                .deliveryFeedbackTtScore(10.0)
+                .practiceRating(0.0)
+                .contributionEngXCulture(0L)
+                .contributionExtraMiles(0L)
+                .cultureScoreFromFeedback(0.0)
+                .build();
+
+        when(talentExcelVersionService.findLatestVersion())
+                .thenReturn(mockExcelVersion);
+        when(topTalentEmployeeRepository.findAllByTopTalentExcelVersion(mockExcelVersion))
+                .thenReturn(Collections.singletonList(deliveryOnlyEmployee));
+        when(topTalentEmployeeMapper.employeeDataToEmployeeDTO(any()))
+                .thenAnswer(invocation -> {
+                    TopTalentEmployee employee = invocation.getArgument(0);
+                    TopTalentEmployeeDTO dto = new TopTalentEmployeeDTO();
+                    dto.setOverallWeightedScoreForMerit(employee.getOverallWeightedScoreForMerit());
+                    return dto;
+                });
+
+        List<TopTalentEmployeeDTO> result = weightedScoreCalculatorService.calculateAndAssignWeightedScores();
+
+        Assertions.assertEquals(2.0, result.get(0).getOverallWeightedScoreForMerit(), 0.01);
     }
 
 
