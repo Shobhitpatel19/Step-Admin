@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -51,17 +52,24 @@ public class WeightedScoreCalculatorServiceImpl implements WeightedScoreCalculat
     }
 
     private double calculateWeightedScore(TopTalentEmployee employee) {
-        Double totalScore = 0D;
+        double practiceRatingScore = PRACTICE_RATING_WEIGHTAGE * getOrDefault(employee.getPracticeRating());
+        double engxExtraMileScore = (ENGX_SCORE_WEIGHTAGE * getOrDefault(employee.getContributionEngXCulture()))
+                + (EXTRA_MILE_SCORE_WEIGHTAGE * getOrDefault(employee.getContributionExtraMiles()));
+        double cultureScore = CULTURE_SCORE_WEIGHTAGE * getOrDefault(employee.getCultureScoreFromFeedback());
+        double deliveryFeedbackScore = DELIVERY_TI_SCORE_WEIGHTAGE * getOrDefault(employee.getDeliveryFeedbackTtScore());
 
-        totalScore += CULTURE_SCORE_WEIGHTAGE*employee.getCultureScoreFromFeedback();
-        totalScore += DELIVERY_TI_SCORE_WEIGHTAGE*employee.getDeliveryFeedbackTtScore();
-        totalScore += PRACTICE_RATING_WEIGHTAGE*employee.getPracticeRating();
-        totalScore += ENGX_SCORE_WEIGHTAGE*employee.getContributionEngXCulture();
-        totalScore += EXTRA_MILE_SCORE_WEIGHTAGE*employee.getContributionExtraMiles();
+        double totalScore = practiceRatingScore + engxExtraMileScore + cultureScore + deliveryFeedbackScore;
 
-        DecimalFormat df = new DecimalFormat("#.##");
-        String formattedValue = df.format(totalScore);
+        return BigDecimal.valueOf(totalScore)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
 
-        return Double.parseDouble(formattedValue);
+    private double getOrDefault(Double score) {
+        return score == null ? 0D : score;
+    }
+
+    private double getOrDefault(Long score) {
+        return score == null ? 0D : score.doubleValue();
     }
 }

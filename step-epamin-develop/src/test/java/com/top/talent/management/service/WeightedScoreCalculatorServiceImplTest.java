@@ -106,7 +106,13 @@ class WeightedScoreCalculatorServiceImplTest {
                         0.0)
         );
 
-        double calculatedScore = 8.53;
+        double calculatedScore = Math.round((
+                (employee1.getPracticeRating() * PRACTICE_RATING_WEIGHTAGE)
+                        + (employee1.getContributionEngXCulture() * ENGX_SCORE_WEIGHTAGE)
+                        + (employee1.getContributionExtraMiles() * EXTRA_MILE_SCORE_WEIGHTAGE)
+                        + (employee1.getCultureScoreFromFeedback() * CULTURE_SCORE_WEIGHTAGE)
+                        + (employee1.getDeliveryFeedbackTtScore() * DELIVERY_TI_SCORE_WEIGHTAGE)
+        ) * 100.0) / 100.0;
 
         when(topTalentEmployeeMapper.employeeDataToEmployeeDTO(any()))
                 .thenAnswer(invocation -> {
@@ -139,7 +145,7 @@ class WeightedScoreCalculatorServiceImplTest {
                 .uid(102L)
                 .topTalentExcelVersion(mockExcelVersion)
                 .name("Jane Doe")
-                .deliveryFeedbackTtScore(10.0)
+                .deliveryFeedbackTtScore(4.0)
                 .practiceRating(0.0)
                 .contributionEngXCulture(0L)
                 .contributionExtraMiles(0L)
@@ -160,7 +166,53 @@ class WeightedScoreCalculatorServiceImplTest {
 
         List<TopTalentEmployeeDTO> result = weightedScoreCalculatorService.calculateAndAssignWeightedScores();
 
-        Assertions.assertEquals(2.0, result.get(0).getOverallWeightedScoreForMerit(), 0.01);
+        Assertions.assertEquals(0.8, result.get(0).getOverallWeightedScoreForMerit(), 0.01);
+    }
+
+    @Test
+    void testCalculateAndAssignWeightedScores_ChangesByDeliveryWeightOnly() {
+        TopTalentExcelVersion mockExcelVersion = new TopTalentExcelVersion();
+        mockExcelVersion.setFileName("STEP_2025_V1");
+
+        TopTalentEmployee lowDeliveryEmployee = TopTalentEmployee.builder()
+                .uid(201L)
+                .topTalentExcelVersion(mockExcelVersion)
+                .name("Employee A")
+                .deliveryFeedbackTtScore(1.0)
+                .practiceRating(3.0)
+                .contributionEngXCulture(3L)
+                .contributionExtraMiles(3L)
+                .cultureScoreFromFeedback(3.0)
+                .build();
+
+        TopTalentEmployee highDeliveryEmployee = TopTalentEmployee.builder()
+                .uid(202L)
+                .topTalentExcelVersion(mockExcelVersion)
+                .name("Employee B")
+                .deliveryFeedbackTtScore(2.0)
+                .practiceRating(3.0)
+                .contributionEngXCulture(3L)
+                .contributionExtraMiles(3L)
+                .cultureScoreFromFeedback(3.0)
+                .build();
+
+        when(talentExcelVersionService.findLatestVersion()).thenReturn(mockExcelVersion);
+        when(topTalentEmployeeRepository.findAllByTopTalentExcelVersion(mockExcelVersion))
+                .thenReturn(List.of(lowDeliveryEmployee, highDeliveryEmployee));
+        when(topTalentEmployeeMapper.employeeDataToEmployeeDTO(any()))
+                .thenAnswer(invocation -> {
+                    TopTalentEmployee employee = invocation.getArgument(0);
+                    TopTalentEmployeeDTO dto = new TopTalentEmployeeDTO();
+                    dto.setOverallWeightedScoreForMerit(employee.getOverallWeightedScoreForMerit());
+                    return dto;
+                });
+
+        List<TopTalentEmployeeDTO> result = weightedScoreCalculatorService.calculateAndAssignWeightedScores();
+
+        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(DELIVERY_TI_SCORE_WEIGHTAGE,
+                result.get(0).getOverallWeightedScoreForMerit() - result.get(1).getOverallWeightedScoreForMerit(),
+                0.01);
     }
 
 
